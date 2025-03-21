@@ -19,7 +19,7 @@ class _PathSpecifier(Screen):
 
         echo()
         all_chs = []
-        x = ''
+        x = 0
         self.inputbox.border()
         # TODO - Make the keys such as backspaces usable, and prevent those keys to adding to the list
         self.inputbox.addstr(0, 1, "Enter something, typed letters cannot be deleted(yet):")
@@ -30,20 +30,20 @@ class _PathSpecifier(Screen):
             # Receive a letter from user and append them into the lists
             all_chs.append(chr(self.inputbox.getch()))
             # TODO - Make the cursor follow the last typed letter
-            printable_chs = all_chs[0:len(all_chs)]
+            printable_chs = all_chs[0+x:len(all_chs)]
 
-            # Delete the very first inputted character to give some space 
-            # for next inputted letter when the list reaches its capacity
-            # of 98 letters(100 - border widths)
+            # Left out the first inputted characters to give some space 
+            # for last inputted letter when the list reaches its capacity
+            # of 98 letters(100 - border widths which is 2)
 
             if len(all_chs) >= 98:
                 # Will raise error if only delete at 100 chs because the
-                # max it goes is 98, and once it reaches 98, immediately
-                # remove the first inputted ch
-                del all_chs[0]
+                # max it goes is 98, and once it reaches 98, left out the
+                # the first inputted chs, to do so, we need a counter
+                x += 1
 
             for index, ch in enumerate(printable_chs):
-                self.inputbox.addstr(0, 1, str(x))
+                self.inputbox.addstr(0, 1, f'')
                 self.inputbox.addstr(1, 1+index, ch)
 
             self.inputbox.refresh(0, 0, 0, 0, 3, 100)
