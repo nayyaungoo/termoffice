@@ -5,8 +5,21 @@ from .bases import Screen
 class _Terminal(Screen):
 
     def configuration(self):
-        self.console = newwin(self.maxy-3, self.maxx-1, 0, 1)
-        self.cinput = newwin(3, self.maxx-1, self.maxy - 3, 1)
+
+        self.console = newwin(
+            self.maxy-3,    # Maximum y minus 3
+            self.maxx-1,    # Maximum x minus 1
+            0, 
+            1
+        )
+
+        self.cinput = newwin(
+            3,
+            self.maxx-1,    # Maximum x minus 1
+            self.maxy - 3,  # y before 3 of Maximum y
+            1
+        )
+
         echo()
 
     def main(self):
