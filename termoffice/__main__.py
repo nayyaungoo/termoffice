@@ -1,4 +1,7 @@
-from .ui import MainMenu, PathSpecifier
+from .ui import (
+    MainMenu,
+    #PathSpecifier
+)
 
 MainMenu.run()                  # passed
 MainMenu.clear()                # passed
