@@ -10,6 +10,9 @@ class Screen(ABC):
         noecho()
         self.maxy, self.maxx = self.screen.getmaxyx()
 
+    def configuration(self):
+        ...
+
     @abstractmethod
     def main(self):
         ...
@@ -19,6 +22,7 @@ class Screen(ABC):
 
     def run(self):
         self.start()
+        self.configuration()
         self.main()
         self.stop()
 
