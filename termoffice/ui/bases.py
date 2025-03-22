@@ -1,24 +1,18 @@
 from curses import initscr, endwin, curs_set, noecho
+from abc import ABC, abstractmethod
 
 
-class Screen(object):
-
-    @property
-    def maxy(self):
-        return self.screen.getmaxyx()[0]
-
-    @property
-    def maxx(self):
-        return self.screen.getmaxyx()[1]
-
-    def configuration(self):
-        ...
+class Screen(ABC):
 
     def start(self):
         self.screen = initscr()
-        self.configuration()
         curs_set(0)
         noecho()
+        self.maxy, self.maxx = self.screen.getmaxyx()
+
+    @abstractmethod
+    def main(self):
+        ...
 
     def stop(self):
         endwin()
