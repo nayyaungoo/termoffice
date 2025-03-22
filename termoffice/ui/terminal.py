@@ -34,9 +34,8 @@ class _Terminal(Screen):
             self.cinput.refresh()
             self.console.refresh()
 
-            self.cinput.addstr(1, 2, "> ")
-            received_command = self.cinput.getstr(1, 4).decode('utf-8')
-            
+            received_command = self.get_command()
+
             self.cinput.clear()
             self.validate_command(received_command)
 
@@ -47,6 +46,12 @@ class _Terminal(Screen):
         if command not in self.acceptable_commands:
             self.console.addstr(1, 1, f"console: {command} is not a command.")
             self.console.addstr(2, 1, f"Use --help to display all the usable commands >w<.")
+
+    def get_command(self) -> str:
+        self.cinput.border()
+        self.cinput.refresh()
+        self.cinput.addstr(1, 2, "> ")
+        return self.cinput.getstr(1, 4).decode('utf-8')
 
 Terminal = _Terminal()
 
