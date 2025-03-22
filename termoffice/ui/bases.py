@@ -3,6 +3,14 @@ from curses import initscr, endwin, curs_set, noecho
 
 class Screen(object):
 
+    @property
+    def maxy(self):
+        return self.screen.getmaxyx()[0]
+
+    @property
+    def maxx(self):
+        return self.screen.getmaxyx()[1]
+
     def configuration(self):
         ...
 
