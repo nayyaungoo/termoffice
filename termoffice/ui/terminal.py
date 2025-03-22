@@ -21,6 +21,9 @@ class _Terminal(Screen):
         )
 
         echo()
+        self.acceptable_commands = {
+            'clear'
+        }
 
     def main(self):
 
@@ -32,13 +35,18 @@ class _Terminal(Screen):
             self.console.refresh()
 
             self.cinput.addstr(1, 2, "> ")
-            command = self.cinput.getstr(1, 4)
+            received_command = self.cinput.getstr(1, 4).decode('utf-8')
             
             self.cinput.clear()
-            self.console.addstr(1, 1, command)
+            self.validate_command(received_command)
 
             self.cinput.refresh()
             self.console.refresh()
+
+    def validate_command(self, command):
+        if command not in self.acceptable_commands:
+            self.console.addstr(1, 1, f"console: {command} is not a command.")
+            self.console.addstr(2, 1, f"Use --help to display all the usable commands >w<.")
 
 Terminal = _Terminal()
 
